@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["es2016", "esnext.asynciterable"],
-    "types": ["node"],
+    "lib": [
+      "es2016",
+      "esnext.asynciterable"
+    ],
+    "types": [
+      "node"
+    ],
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -15,6 +20,14 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "src/test", "**/*.spec.ts", "**/*.test.ts"]
+  "include": [
+    "./src/**/*",
+    "arduino.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/test",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

@@ -28,7 +28,6 @@ function Marker({ map, position, content, onClick }: MarkerProps) {
 
         if (onClick) {
             naver.maps.Event.addListener(marker, "click", onClick);
-            map.panTo(position);
         }
 
         return () => {
