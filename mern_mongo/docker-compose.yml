@@ -9,7 +9,7 @@ services:
     # 컨테이너 실행 시 재시작
     restart: always
     # 컨테이너 이름 설정
-    container_name: mern-mongo
+    container_name: tunneling
     # 접근 포트 설정 (컨테이너 외부:컨테이너 내부) 기본포트
     ports:
       - "27017:27017"
