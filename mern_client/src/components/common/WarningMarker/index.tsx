@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import './Marker.css';
 import { infos } from '../../../data/infos';
 
 interface WarningMarkerProps {
