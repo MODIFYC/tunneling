@@ -9,6 +9,7 @@ import { useMutation } from 'react-query';
 import { createInfo } from '../apis/info';
 import { AxiosError } from 'axios';
 import { HttpCode } from '../types/httpCode';
+import WarningMarker from './common/WarningMarker';
 
 
 interface MarkersContainerProps {
@@ -44,6 +45,9 @@ function MarkersContainer({ type = "home" }: MarkersContainerProps) {
 
     return (
         <>
+            {/* WarningMarker 추가 */}
+            <WarningMarker map={map} />
+
             {infos?.map((info: Info) => (
                 <Marker
                     key={info.id}
