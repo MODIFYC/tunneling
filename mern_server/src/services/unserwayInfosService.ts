@@ -11,7 +11,7 @@ export default {
   saveUnderwayInfos: async () => {
     try {
       // Kakao API를 통해 *지하차도 정보 검색
-      const result = await axios.get<SearchResponse>(encodeURI(`https://dapi.kakao.com/v2/local/search/keyword?query=&*지하차도`), {
+      const result = await axios.get<SearchResponse>(encodeURI(`https://dapi.kakao.com/v2/local/search/keyword?query=*지하차도`), {
         headers: {
           Authorization: `KakaoAK ${process.env.KAKAO_API_KEY}`,
         },
@@ -26,7 +26,7 @@ export default {
           lng: Number(item.x),
         },
       }));
-
+      console.log(underwayInfos)
       // MongoDB에 *지하차도 정보 저장
       await underwayInfoModel.create(underwayInfos);
 
