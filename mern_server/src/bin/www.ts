@@ -16,7 +16,7 @@ import mongoose from 'mongoose';
 const port = normalizePort('3001');
 app.set('port', port);
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env
+const { DB_USER, DB_PASSWORD, DB_HOST} = process.env
 
 mongoose
   .connect(
