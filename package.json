@@ -16,6 +16,7 @@
     "concurrently": "^7.6.0",
     "docker": "^1.0.0",
     "docker-compose": "^0.24.3",
+    "react-query": "^3.39.3",
     "start": "^5.1.0"
   }
 }

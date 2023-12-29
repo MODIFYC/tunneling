@@ -31,4 +31,5 @@ export default {
       throw new HttpException(HttpCode.INTERNAL_SERVER_ERROR, 'DB 서버 에러');
     }
   },
+
 };

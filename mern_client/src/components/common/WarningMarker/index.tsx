@@ -1,63 +1,48 @@
-import React, { useEffect, useRef } from 'react';
-import { infos } from '../../../data/infos';
+import { useEffect } from "react";
 
 interface WarningMarkerProps {
-    map: naver.maps.Map;
+  map: naver.maps.Map;
+  position: {
+    lat: number;
+    lng: number;
+  };
+  content: string;
+  onClick?: () => void;
 }
 
-function WarningMarker({ map }: WarningMarkerProps) {
-    const markerRef = useRef<null | naver.maps.Marker>(null);
+function WarningMarker({
+  map,
+  position,
+  content,
+  onClick,
+}: WarningMarkerProps) {
+  useEffect(() => {
+    let marker: naver.maps.Marker | null = null;
 
-    useEffect(() => {
-        const fetchData = () => {
-            if (infos.length > 0) {
-                if (!markerRef.current) {
-                    createMarkers(infos);
-                }
-            }
-        };
+    if (map) {
+      marker = new naver.maps.Marker({
+        map,
+        position: new naver.maps.LatLng(position.lat, position.lng),
+        icon: {
+          url: "/warning_marker.png", // Customize the icon URL
+          size: new naver.maps.Size(32, 32), // Specify the icon size
+          origin: new naver.maps.Point(0, 0), // Specify the origin of the icon
+          anchor: new naver.maps.Point(16, 32), // Specify the anchor point of the icon
+        },
+      });
+    }
 
-        fetchData();
-    }, [infos]);
+    if (onClick) {
+      naver.maps.Event.addListener(marker, "click", onClick);
+      map.panTo(position);
+    }
 
-    const createMarkers = (data: any) => {
-        if (!map) {
-            return; // map이 없으면 함수를 빠져나감
-        }
-
-        data.forEach((item: any) => {
-            const marker = new naver.maps.Marker({
-                map,
-                position: new naver.maps.LatLng(item.position.lat, item.position.lng),
-                icon: {
-                    url: '/warning_marker.png', // 사용자 정의 이미지 경로
-                    size: new naver.maps.Size(32, 32), // 이미지 크기 지정
-                    origin: new naver.maps.Point(0, 0), // 이미지의 원점 지정
-                    anchor: new naver.maps.Point(16, 32), // 이미지의 앵커(기준점) 지정
-                },
-            });
-
-            // 클릭 이벤트 처리 등 추가 설정...
-            naver.maps.Event.addListener(marker, 'click', function () {
-                const infowindow = new naver.maps.InfoWindow({
-                    content: `<div">${item.placeName}</div>`,
-                });
-                infowindow.open(map, marker.getPosition());
-            });
-
-            // markerRef에 마커 저장
-            markerRef.current = marker;
-        });
+    return () => {
+      marker?.setMap(null);
     };
+  }, [map]);
 
-    useEffect(() => {
-        return () => {
-            // 컴포넌트가 언마운트되면 마커 제거
-            markerRef.current?.setMap(null);
-        };
-    }, []);
-
-    return null;
+  return null;
 }
 
 export default WarningMarker;
